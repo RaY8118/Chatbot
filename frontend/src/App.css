@@ -40,3 +40,45 @@
 .read-the-docs {
   color: #888;
 }
+/* App.css */
+.markdown-content {
+  font-family: 'Arial', sans-serif; /* Change font */
+  font-size: 14px; /* Adjust font size */
+  line-height: 1.6; /* Better spacing */
+  color: #333; /* Text color */
+}
+
+.markdown-content a {
+  color: #007bff; /* Link color */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.markdown-content a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.markdown-content strong {
+  font-weight: bold; /* Bold text */
+  color: #000;
+}
+
+.markdown-content em {
+  font-style: italic; /* Italics */
+  color: #555;
+}
+
+.markdown-content ul {
+  padding-left: 20px; /* Indentation for unordered lists */
+}
+
+.markdown-content li {
+  margin-bottom: 8px; /* Spacing between list items */
+}
+
+.markdown-content blockquote {
+  border-left: 4px solid #ddd; /* Styled blockquote */
+  padding-left: 10px;
+  color: #666;
+  font-style: italic;
+  background-color: #f9f9f9;
+}

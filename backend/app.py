@@ -9,16 +9,16 @@ TENSORZERO_URL = "http://localhost:3000/inference"
 app = Flask(__name__)
 
 # Enable CORS for all routes
-CORS(app)  # This will allow all origins. You can customize it if needed (e.g., allowing specific origins).
+CORS(app)  # This will allow all origins.
 
 def get_chatbot_response(user_input):
     """
     Function to get the response from the TensorZero service.
     """
     payload = {
-        "function_name": "my_function_name",  # Replace with your actual function name in tensorzero.toml
+        "function_name": "chatbot", 
         "input": {
-	    "system" :"You are a medical professinal so answer the questions with outmost care and importance.You will be answering the questions for to elder peoples mostly suffering from alzheimer's or some memory lossing diseases",
+	    "system" :"",
             "messages": [
                 {
                     "role": "user",

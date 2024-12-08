@@ -2,3 +2,5 @@
 *.pyc
 __pycache__/
 output.json
+data.json
+try.py
