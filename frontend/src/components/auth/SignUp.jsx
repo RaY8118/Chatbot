@@ -24,7 +24,7 @@ const SignUp = () => {
       setIsSigningUp(true);
       try {
         await doCreateUserWithEmailAndPassword(email, password);
-        navigate("/chatbot"); // Redirect to the chatbot page
+        navigate("/chatbot");
       } catch (err) {
         setErrorMessage(err.message);
       } finally {
@@ -49,100 +49,91 @@ const SignUp = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Sign Up</h2>
-      {errorMessage && <p style={styles.error}>{errorMessage}</p>}
-      <form onSubmit={onSubmit} style={styles.form}>
-        <div style={styles.inputContainer}>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
-            required
-          />
+    <>
+      <div className="flex items-center justify-center h-screen bg-gray-100">
+        <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold text-center">Sign Up</h2>
+          {errorMessage && (
+            <p className="mt-2 text-sm text-red-600">{errorMessage}</p>
+          )}
+          <form onSubmit={onSubmit} className="mt-6 space-y-4">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email:
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Password:
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="confirmPassword"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Confirm Password:
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={confirmPassword}
+                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              disabled={isSigningUp}
+            >
+              {isSigningUp ? "Signing Up..." : "Sign Up"}
+            </button>
+          </form>
+          <p className="mt-4 text-center">Or</p>
+          <button
+            onClick={onGoogleSignUp}
+            className="w-full px-4 py-2 text-white bg-red-600 rounded-lg hover:bg-red-700"
+            disabled={isSigningUp}
+          >
+            {isSigningUp ? "Signing Up..." : "Sign up with Google"}
+          </button>
+          <p className="mt-4 text-center text-sm text-gray-600">
+            Already have a account?{" "}
+            <a
+              href="/"
+              className="font-medium text-blue-600 hover:text-blue-500"
+            >
+              Sign in here
+            </a>
+          </p>
         </div>
-        <div style={styles.inputContainer}>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
-            required
-          />
-        </div>
-        <div style={styles.inputContainer}>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            style={styles.input}
-            required
-          />
-        </div>
-        <button type="submit" style={styles.button} disabled={isSigningUp}>
-          {isSigningUp ? "Signing Up..." : "Sign Up"}
-        </button>
-      </form>
-      <p>Or</p>
-      <button
-        onClick={onGoogleSignUp}
-        style={{ ...styles.button, ...styles.googleButton }}
-        disabled={isSigningUp}
-      >
-        {isSigningUp ? "Signing Up..." : "Sign up with Google"}
-      </button>
-    </div>
+      </div>
+    </>
   );
-};
-
-const styles = {
-  container: {
-    maxWidth: "400px",
-    margin: "50px auto",
-    padding: "20px",
-    border: "1px solid #ccc",
-    borderRadius: "10px",
-    textAlign: "center",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  inputContainer: {
-    marginBottom: "15px",
-    textAlign: "left",
-  },
-  input: {
-    width: "100%",
-    padding: "10px",
-    marginTop: "5px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-  },
-  button: {
-    padding: "10px 20px",
-    border: "none",
-    borderRadius: "5px",
-    backgroundColor: "#007BFF",
-    color: "#fff",
-    fontSize: "16px",
-    cursor: "pointer",
-    marginTop: "10px",
-  },
-  googleButton: {
-    backgroundColor: "#DB4437",
-  },
-  error: {
-    color: "red",
-    marginBottom: "10px",
-  },
 };
 
 export default SignUp;

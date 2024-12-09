@@ -11,6 +11,7 @@ import {
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const API_URL = "http://localhost:5000/chat";
 
@@ -24,7 +25,7 @@ function Chatbot() {
     },
   ]);
 
-  const navigate = useNavigate(); // React Router's hook for navigation
+  const navigate = useNavigate();
 
   const handleSend = async (message) => {
     const newMessage = {
@@ -72,34 +73,40 @@ function Chatbot() {
   }
 
   const handleLogout = () => {
-    // Clear authentication info (if any) and navigate to login page
-    alert("Logged out successfully!");
+    // alert("Logged out successfully!");
+    toast.success("Logged out successfully!");
     navigate("/");
   };
 
   return (
     <>
-      <div style={styles.container}>
-        <header style={styles.header}>
-          <h1 style={styles.headerTitle}>Gemini Chatbot</h1>
-          <button style={styles.logoutButton} onClick={handleLogout}>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-5">
+        <header className="w-full flex justify-between items-center p-3 bg-blue-600 text-white rounded-md">
+          <h1 className="m-0 p-2 text-xl">Gemini Chatbot</h1>
+          <button
+            className="px-4 py-2 text-sm bg-red-500 text-white rounded-md hover:bg-red-600"
+            onClick={handleLogout}
+          >
             Logout
           </button>
         </header>
 
-        <div style={styles.chatContainer}>
+        <div className="relative h-[700px] w-full max-w-[700] shadow-lg rounded-lg overflow-hidden bg-white flex flex-col text-wrap">
           <MainContainer>
             <ChatContainer>
               <MessageList
                 typingIndicator={
-                  typing ? <TypingIndicator content="Gemini is typing..." /> : null
+                  typing ? (
+                    <TypingIndicator content="Gemini is typing..." />
+                  ) : null
                 }
+                className="flex-grow overflow-y-auto"
               >
                 {messages.map((message, i) => (
                   <Message key={i} model={message}>
                     <Message.CustomContent>
                       <ReactMarkdown
-                        className="markdown-content"
+                        className="markdown-content text-lg text-wrap"
                         remarkPlugins={[remarkGfm]}
                       >
                         {message.message}
@@ -109,7 +116,11 @@ function Chatbot() {
                 ))}
               </MessageList>
 
-              <MessageInput placeholder="Type a message..." onSend={handleSend} />
+              <MessageInput
+                placeholder="Type a message..."
+                onSend={handleSend}
+                className="mt-auto"
+              />
             </ChatContainer>
           </MainContainer>
         </div>
@@ -117,50 +128,5 @@ function Chatbot() {
     </>
   );
 }
-
-const styles = {
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: "100vh",
-    backgroundColor: "#f5f5f5",
-    padding: "20px",
-  },
-  header: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "10px 20px",
-    backgroundColor: "#007BFF",
-    color: "#fff",
-    borderRadius: "8px",
-    marginBottom: "20px",
-  },
-  headerTitle: {
-    margin: 0,
-    fontSize: "24px",
-  },
-  logoutButton: {
-    padding: "10px 15px",
-    fontSize: "16px",
-    backgroundColor: "#FF4B4B",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  chatContainer: {
-    position: "relative",
-    height: "700px",
-    width: "100%",
-    maxWidth: "700px",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
-    borderRadius: "10px",
-    overflow: "hidden",
-  },
-};
 
 export default Chatbot;

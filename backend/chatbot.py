@@ -7,7 +7,7 @@ TENSORZERO_URL = "http://localhost:3000/inference"
 def get_chatbot_response(user_input):
     # Prepare the payload for the request
     payload = {
-        "function_name": "my_function_name",  # Match the function name in tensorzero.toml
+        "function_name": "chatbot",  # Match the function name in tensorzero.toml
         "input": {
             "messages": [
                 {

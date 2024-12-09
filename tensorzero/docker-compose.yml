@@ -1,6 +1,3 @@
-# This is a simplified example for learning purposes. Do not use this in production.
-# For production-ready deployments, see: https://www.tensorzero.com/docs/gateway/deployment
-
 services:
   gateway:
     image: tensorzero/gateway
